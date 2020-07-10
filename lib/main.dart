@@ -5,7 +5,8 @@
 // import 'package:disenios2/src/labs/slideshow_page.dart';
 // import 'package:disenios2/src/retos/cuadrado_animado.dart';
 // import 'package:disenios2/src/pages/slideshow_page.dart';
-import 'package:disenios2/src/pages/pinterest_page.dart';
+//import 'package:disenios2/src/pages/pinterest_page.dart';
+import 'package:disenios2/src/pages/emergency_page.dart';
 import 'package:flutter/material.dart';
  
 void main() => runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños 2',
-       home: PinterestPage()
+       home: EmergencyPage()
     );
   }
 }
