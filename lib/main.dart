@@ -7,6 +7,7 @@
 // import 'package:disenios2/src/pages/slideshow_page.dart';
 //import 'package:disenios2/src/pages/pinterest_page.dart';
 // import 'package:disenios2/src/pages/emergency_page.dart';
+import 'package:disenios2/src/pages/launcher_page.dart';
 import 'package:disenios2/src/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
  
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños 2',
-       home: SliverListPage()
+       home: LauncherPage()
     );
   }
 }
