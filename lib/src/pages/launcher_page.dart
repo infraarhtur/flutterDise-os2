@@ -1,6 +1,8 @@
 import 'package:disenios2/src/routes/routes.dart';
+import 'package:disenios2/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class LauncherPage extends StatelessWidget {
   @override
@@ -16,25 +18,29 @@ class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   
+final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
+
     return ListView.separated(
         physics: BouncingScrollPhysics(),
         separatorBuilder: (context, i) => Divider(
-              color: Colors.blue,
+              color: appTheme.primaryColorLight,
             ),
         itemBuilder: (context, i) => ListTile(
               leading: FaIcon(
                 pageRoutes[i].icon,
-                color: Colors.blue,
+                color: appTheme.accentColor,
               ),
-               title:Text(pageRoutes[i].title) ,
+              title: Text(pageRoutes[i].title),
               trailing: Icon(
                 Icons.chevron_right,
-                color: Colors.blue,
+                color: appTheme.accentColor,
               ),
               onTap: () {
- Navigator.push(context, MaterialPageRoute(builder: ( context)=> pageRoutes[i].page));
-
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => pageRoutes[i].page));
               },
             ),
         itemCount: pageRoutes.length);
@@ -42,8 +48,13 @@ class _ListaOpciones extends StatelessWidget {
 }
 
 class _MenuPrincipal extends StatelessWidget {
+
+  
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final accentColor =appTheme.currentTheme.accentColor ;
+
     return Drawer(
       child: Container(
         child: Column(
@@ -54,23 +65,36 @@ class _MenuPrincipal extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 child: CircleAvatar(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: accentColor,
                   child: Text('LA', style: TextStyle(fontSize: 50)),
                 ),
               ),
             ),
             Expanded(child: _ListaOpciones()),
             ListTile(
-              leading: Icon(Icons.lightbulb_outline, color: Colors.blue),
+              leading: Icon(Icons.lightbulb_outline, color: accentColor),
               title: Text('Dark mode'),
               trailing: Switch.adaptive(
-                  activeColor: Colors.blue, value: true, onChanged: (value) {}),
+                  activeColor: accentColor,
+                  value: appTheme.darkTheme,
+                  onChanged: (value) {
+                    appTheme.darkTheme = value;
+                  }),
             ),
-            ListTile(
-              leading: Icon(Icons.add_to_home_screen, color: Colors.blue),
-              title: Text('Custom'),
-              trailing: Switch.adaptive(
-                  value: true, activeColor: Colors.blue, onChanged: (value) {}),
+            SafeArea(
+              bottom: true,
+              top: false,
+              left: false,
+              child: ListTile(
+                leading: Icon(Icons.add_to_home_screen, color: accentColor),
+                title: Text('Custom'),
+                trailing: Switch.adaptive(
+                    value: appTheme.customTheme,
+                    activeColor:accentColor,
+                    onChanged: (value) {
+                      appTheme.customTheme = value;
+                    }),
+              ),
             )
           ],
         ),

@@ -12,9 +12,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final pageRoutes = <_Route>[
 _Route(FontAwesomeIcons.slideshare, "Slideshow", SlideShowPage()),
-_Route(FontAwesomeIcons.ambulance, "Slideshow", EmergencyPage()),
+_Route(FontAwesomeIcons.ambulance, "Emergencia", EmergencyPage()),
 _Route(FontAwesomeIcons.heading, "Encabezados", HeadersPages()),
-_Route(FontAwesomeIcons.peopleCarry, "Encabezados", CuadradoAnimadoPage()),
+_Route(FontAwesomeIcons.peopleCarry, "Cuadro animado", CuadradoAnimadoPage()),
 _Route(FontAwesomeIcons.circleNotch, "Barra progreso", GraficasCircularesPage()),
  _Route(FontAwesomeIcons.pinterest, "Pinterest", PinterestPage()),
 _Route(FontAwesomeIcons.mobile, "slivers", SliverListPage()),

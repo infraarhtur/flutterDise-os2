@@ -1,23 +1,23 @@
-// import 'package:disenios2/src/labs/animaciones_page.dart';
-// import 'package:disenios2/src/labs/circula_progres_page.dart';
-// import 'package:disenios2/src/pages/graficas_circulares_page.dart';
-// import 'package:disenios2/src/pages/headers_page.dart';
-// import 'package:disenios2/src/labs/slideshow_page.dart';
-// import 'package:disenios2/src/retos/cuadrado_animado.dart';
-// import 'package:disenios2/src/pages/slideshow_page.dart';
-//import 'package:disenios2/src/pages/pinterest_page.dart';
-// import 'package:disenios2/src/pages/emergency_page.dart';
+
 import 'package:disenios2/src/pages/launcher_page.dart';
-import 'package:disenios2/src/pages/sliver_list_page.dart';
+import 'package:disenios2/src/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
  
-void main() => runApp(MyApp());
+void main() => runApp(ChangeNotifierProvider(
+  
+  create: (_)=> new ThemeChanger(2),
+
+  child: MyApp()));
  
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+       theme:currentTheme,
       title: 'Diseños 2',
        home: LauncherPage()
     );
