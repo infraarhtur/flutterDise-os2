@@ -20,7 +20,9 @@ ThemeChanger(int theme){
        case 2:
     _darkTheme = true;
     _customTheme = false;
-    _currentTheme = ThemeData.dark();
+    _currentTheme = ThemeData.dark().copyWith(
+      accentColor: Colors.pink
+    );
     break;
        case 3:
     _darkTheme = false;
@@ -38,7 +40,9 @@ ThemeChanger(int theme){
     _customTheme = false;
     _darkTheme = value;
     if(value){
-      _currentTheme = ThemeData.dark();
+      _currentTheme = ThemeData.dark().copyWith(
+      accentColor: Colors.pink
+    );
     }else{
         _currentTheme = ThemeData.light();
     }
@@ -50,7 +54,16 @@ ThemeChanger(int theme){
     _darkTheme = false;
 
      if(!value){
-      _currentTheme = ThemeData.dark();
+      _currentTheme = ThemeData.dark().copyWith(
+        accentColor: Color(0xff48A0EB),
+        primaryColorLight: Colors.white,
+        scaffoldBackgroundColor:  Color(0xff162026),
+       textTheme: TextTheme(
+         body1: TextStyle(color: Colors.white)
+         )
+        // textTheme.body1.color: 
+
+      );
     }else{
         _currentTheme = ThemeData.light();
     }
