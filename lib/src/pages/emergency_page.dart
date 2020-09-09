@@ -21,6 +21,12 @@ class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+   bool islarge;
+    if (MediaQuery.of(context).size.height > 500) {
+      islarge = true;
+    }else {
+       islarge = false;
+    }
 
 final items = <ItemBoton>[
   new ItemBoton( FontAwesomeIcons.carCrash, 'Motor Accident', Color(0xff6989F5), Color(0xff906EF5) ),
@@ -55,11 +61,12 @@ List<Widget> itemMap = items.map(
       body:Stack(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top:200),
+            margin: EdgeInsets.only(top:(islarge)?220:10),
            
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: <Widget>[
+                if(islarge)
                  SizedBox(height: 80),
                  ...itemMap
           
@@ -67,7 +74,8 @@ List<Widget> itemMap = items.map(
               ],
             ),
           ),
-          _Encabezado()
+          if(islarge) _Encabezado()
+         
         ],
       )
    );

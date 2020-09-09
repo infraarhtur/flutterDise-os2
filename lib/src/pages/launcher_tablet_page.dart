@@ -1,29 +1,49 @@
+import 'dart:math';
+
+import 'package:disenios2/src/labs/slideshow_page.dart';
+import 'package:disenios2/src/models/layaut_model.dart';
 import 'package:disenios2/src/routes/routes.dart';
 import 'package:disenios2/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-class LauncherPage extends StatelessWidget {
+class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-       final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
+
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: appTheme.accentColor,
-          title: Text('Diseños en flutter- telefono'),
+          backgroundColor: appTheme.currentTheme.accentColor,
+          title: Text('Diseños en flutter- tablet'),
         ),
         drawer: _MenuPrincipal(),
-        body: _ListaOpciones());
+        body: Row(
+          children: <Widget>[
+            Container(
+              width: 300,
+              height: double.infinity,
+              child: _ListaOpciones(),
+            ),
+            Container(
+              width: 3,
+              height: double.infinity,
+              color: (appTheme.darkTheme)
+                  ? Colors.grey
+                  : appTheme.currentTheme.accentColor,
+            ),
+            Expanded(child: layoutModel.currentPage)
+          ],
+        ));
   }
 }
 
 class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
-
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return ListView.separated(
         physics: BouncingScrollPhysics(),
@@ -41,10 +61,13 @@ final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
                 color: appTheme.accentColor,
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => pageRoutes[i].page));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => pageRoutes[i].page));
+
+                final layoutModel = Provider.of<LayoutModel>(context, listen: false);
+                layoutModel.currentPage = pageRoutes[i].page;
               },
             ),
         itemCount: pageRoutes.length);
@@ -52,12 +75,10 @@ final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 }
 
 class _MenuPrincipal extends StatelessWidget {
-
-  
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
-    final accentColor =appTheme.currentTheme.accentColor ;
+    final accentColor = appTheme.currentTheme.accentColor;
 
     return Drawer(
       child: Container(
@@ -94,7 +115,7 @@ class _MenuPrincipal extends StatelessWidget {
                 title: Text('Custom'),
                 trailing: Switch.adaptive(
                     value: appTheme.customTheme,
-                    activeColor:accentColor,
+                    activeColor: accentColor,
                     onChanged: (value) {
                       appTheme.customTheme = value;
                     }),
